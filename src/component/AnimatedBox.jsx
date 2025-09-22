@@ -1,11 +1,9 @@
 
-import { useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
-
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function AnimatedBox({ children, delay = 0, direction = "up" }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "-100px" });
+  const [hasAnimated, setHasAnimated] = useState(false);
 
   const variants = {
     hidden: { opacity: 0, y: direction === "up" ? 50 : -50 },
@@ -13,21 +11,20 @@ export default function AnimatedBox({ children, delay = 0, direction = "up" }) {
     exit: { opacity: 0, y: direction === "up" ? -50 : 50 },
   };
 
+  useEffect(() => {
+    
+    setHasAnimated(true);
+  }, []);
+
   return (
-    <div ref={ref}>
-      <AnimatePresence>
-        {isInView && (
-          <motion.div
-            variants={variants}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            transition={{ duration: 0.6, delay }}
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    <motion.div
+      variants={variants}
+      initial="hidden"
+      animate={hasAnimated ? "visible" : "hidden"}
+      exit="exit"
+      transition={{ duration: 0.6, delay }}
+    >
+      {children}
+    </motion.div>
   );
 }

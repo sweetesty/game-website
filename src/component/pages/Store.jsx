@@ -1,5 +1,4 @@
 
-import { useState } from "react";
 import AnimatedBox from "../AnimatedBox";
 import { useCart } from "../CartContext";
 import { motion } from "framer-motion";
@@ -7,19 +6,12 @@ import { ShoppingCart } from "lucide-react";
 import heroImage from "../../assets/codhero.jpg";
 
 export default function Store() {
-   const { addToCart } = useCart();
+  const { addToCart } = useCart();
 
   const categories = [
     { name: "PlayStation 5", img: "/images/playstation.png", link: "/playstation" },
     { name: "Xbox", img: "/images/xboxw.png", link: "/xbox" },
     { name: "Nintendo", img: "/images/nintendo.png", link: "/nintendo" },
-  ];
-
-  const features = [
-    { text: "100% Authentic Games", icon: "✅" },
-    { text: "Same-Day Delivery", icon: "🚚" },
-    { text: "Nationwide Delivery", icon: "🌍" },
-    { text: "Secure Payment", icon: "🔒" },
   ];
 
   const products = [
@@ -43,11 +35,12 @@ export default function Store() {
     { id: 18, name: "Resident Evil 7 - Ps5", price: 65000, img: "/images/Resident Evil 7- PS5_.jpg" },
     { id: 19, name: "Split Fiction - Xbox", price: 27500, img: "/images/split fiction xbox_.jpg" },
     { id: 20, name: "Madden NFL 26 - Ps5", price: 60000, img: "/images/Madden NFL 26 - PlayStation 5_.jpg" },
+  
   ];
 
   return (
     <div className="bg-white min-h-screen">
-      {/* Hero */}
+
       <div
         className="relative h-[50vh] sm:h-[60vh] md:h-[70vh] bg-cover bg-center flex items-center justify-center"
         style={{ backgroundImage: `url(${heroImage})` }}
@@ -64,7 +57,7 @@ export default function Store() {
         </motion.div>
       </div>
 
-      {/* Categories */}
+      
       <div className="px-6 md:px-12 py-12">
         <h2 className="text-3xl font-bold text-center mb-10">SHOP BY CATEGORY</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
@@ -89,12 +82,12 @@ export default function Store() {
           ))}
         </div>
 
-        {/* Products */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+    
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 auto-rows-fr">
           {products.map((p, idx) => (
-            <AnimatedBox key={p.id} delay={idx * 0.2}>
+            <AnimatedBox key={p.id} delay={idx * 0.1}>
               <motion.div
-                className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer flex flex-col"
+                className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer flex flex-col h-full"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
               >
@@ -102,19 +95,14 @@ export default function Store() {
                   src={p.img}
                   alt={p.name}
                   className="w-full h-48 object-contain bg-gray-50"
-                  whileHover={{ rotate: -2, scale: 1.03 }}
-                  whileTap={{ rotate: 2, scale: 0.98 }}
-                  transition={{ type: "spring", stiffness: 250 }}
                 />
                 <div className="p-3 text-center flex flex-col flex-grow">
-                  <p className="text-sm font-semibold mb-2 text-[#150433]">{p.name}</p>
-                  <p className="text-black font-bold">₦{p.price.toLocaleString()}</p>
+                  <p className="text-sm font-semibold mb-2 text-[#150433] line-clamp-2">{p.name}</p>
+                  <p className="text-black font-bold mt-auto">₦{p.price.toLocaleString()}</p>
                   <motion.button
-                    onClick={() => {
-                      addToCart(p);
-                      alert(`${p.name} added to cart 🛒`);
-                    }}
+                    onClick={() => { addToCart(p); alert(`${p.name} added to cart 🛒`); }}
                     className="mt-3 flex items-center justify-center gap-2 bg-[#150433] text-white px-4 py-2 rounded-full font-medium shadow-md hover:bg-[#4c1d95] transition"
+                    whileTap={{ scale: 0.95 }}
                   >
                     <ShoppingCart size={18} /> Add to Cart
                   </motion.button>
