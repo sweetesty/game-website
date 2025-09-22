@@ -3,7 +3,7 @@ import { useCart } from "../CartContext";
 import AnimatedBox from "../AnimatedBox";
 import { motion } from "framer-motion";
 import { ShoppingCart } from "lucide-react";
-import PlayStation from './PlayStation';
+
 
 export default function PlayStation() {
   const { addToCart } = useCart();
